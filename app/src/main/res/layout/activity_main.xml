@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<android.support.v4.widget.SwipeRefreshLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/swipe_container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+
+
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        tools:context="shum.ru.myzp.MainActivity"
+        android:orientation="vertical"
+        android:id="@+id/ll_not_empty">
+
+        <android.support.design.widget.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:theme="@style/AppTheme.AppBarOverlay">
+
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:background="@color/colorTollbarMain"
+                app:popupTheme="@style/AppTheme.PopupOverlay"
+                app:titleTextColor="#FFFFFF">
+
+                <LinearLayout
+                    android:layout_height="match_parent"
+                    android:layout_width="match_parent"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:padding="10dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:text="@string/app_name"
+                        android:textSize="24dp"
+                        android:textColor="#FFFFFF"/>
+
+                </LinearLayout>
+
+            </android.support.v7.widget.Toolbar>
+
+        </android.support.design.widget.AppBarLayout>
+
+
+        <LinearLayout
+            android:layout_marginTop="3dp"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_marginBottom="2dp"
+            android:orientation="horizontal"
+            android:background="#bd2e97f2"
+            android:gravity="center"
+
+            android:id="@+id/ll_table_title">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/title_table_x_mounth"
+                android:text="for m"
+                android:layout_weight="2"
+                android:textStyle="bold"
+                android:textAllCaps="true"
+                android:textColor="#FFFF"
+                android:textSize="14dp"
+                android:paddingLeft="8dp"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/title_table_date_of_paying"
+                android:text="date"
+                android:layout_weight="2"
+                android:textStyle="bold"
+                android:textAllCaps="true"
+                android:textColor="#FFFF"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/title_table_value_of_paying"
+                android:text="value"
+                android:layout_weight="2"
+                android:textStyle="bold"
+                android:textAllCaps="true"
+                android:textColor="#FFFF"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:textStyle="bold"
+                android:textAllCaps="true"
+                android:textColor="#FFFF"
+                android:text="STS"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="2" />
+
+
+        </LinearLayout>
+
+
+
+
+        <android.support.v7.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/rv"
+            />
+
+
+
+        <LinearLayout
+            android:layout_height="match_parent"
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:id="@+id/ll_empty_state">
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="20dp"
+                android:text="There is no items on list. You can add it now by pressing Add button"
+                android:gravity="center"
+                android:layout_gravity="center_vertical"/>
+
+
+        </LinearLayout>
+
+
+
+
+    </LinearLayout>
+
+
+
+
+
+
+
+
+</android.support.v4.widget.SwipeRefreshLayout>

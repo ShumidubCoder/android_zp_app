@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+   <TextView
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:text="Fill the items content:"
+       android:layout_gravity="center"
+       android:textSize="20dp"
+       android:layout_marginTop="20dp" />
+
+
+
+    <EditText
+        android:id="@+id/et_mounth"
+        android:hint="For mounth"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="10dp"
+        android:focusable="true">
+
+    </EditText>
+
+
+    <EditText
+        android:id="@+id/et_type"
+        android:hint="Type (AV or ZP)"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:focusable="true"/>
+
+    <EditText
+        android:id="@+id/et_date"
+        android:hint="Date"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:focusable="true"/>
+    <!-- android:nextFocusDown="et_value" -->
+
+
+    <EditText
+        android:id="@+id/et_value"
+        android:hint="Value"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:focusable="true"/>
+    <!--android:nextFocusDown="@id/et_stsDate"-->
+
+
+    <EditText
+        android:id="@+id/et_stsDate"
+        android:hint="RenDate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:focusable="true"/>
+    <!--android:nextFocusDown="@id/et_stsValue"-->
+
+
+    <EditText
+        android:id="@+id/et_stsValue"
+        android:hint="RenValue"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:focusable="true"/>
+
+</LinearLayout>

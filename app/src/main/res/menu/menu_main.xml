@@ -1,0 +1,62 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="shum.ru.myzp.MainActivity">
+
+
+    <group
+        android:id="@+id/menu_group_main_mode">
+
+        <item
+            android:id="@+id/menu_item_help"
+            android:orderInCategory="100"
+            android:title="Help"
+            android:icon="@drawable/ic_aladin_questions"
+
+            app:showAsAction="always" />
+
+        <item
+            android:id="@+id/menu_item_add"
+            android:orderInCategory="100"
+            android:title="Add"
+            android:icon="@drawable/ic_aladin_add"
+            app:showAsAction="always"
+            />
+
+    </group>
+
+
+
+    <!--<item-->
+        <!--android:id="@+id/addOld"-->
+        <!--android:orderInCategory="100"-->
+        <!--android:title="AddOld"-->
+        <!--android:icon="@android:drawable/ic_menu_edit"-->
+        <!--app:showAsAction="always"-->
+        <!--/>-->
+
+
+    <group
+        android:id="@+id/menu_group_edit_and_delete_mode">
+        <item
+            android:id="@+id/menu_item_delete"
+            android:orderInCategory="100"
+            android:title="Help"
+            android:icon="@drawable/ic_de_24"
+            app:showAsAction="always" />
+
+        <item
+            android:id="@+id/menu_item_edit"
+            android:orderInCategory="100"
+            android:title="Add"
+            android:icon="@drawable/ic_edit_24"
+            app:showAsAction="always"
+            />
+    </group>
+
+
+
+
+
+
+</menu>
