@@ -1,4 +1,4 @@
-package shum.ru.myzp;
+package shum.ru.myzp.View;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -13,15 +13,20 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import org.w3c.dom.Text;
-
 import java.util.ArrayList;
 import java.util.List;
+
+import shum.ru.myzp.Controller.ClickListener;
+import shum.ru.myzp.Controller.Message;
+import shum.ru.myzp.Controller.RVAdapter;
+import shum.ru.myzp.Controller.RecyclerTouchListener;
+import shum.ru.myzp.Model.MyZPItem;
+import shum.ru.myzp.R;
+import shum.ru.myzp.Model.SQLDB;
 
 
 public class MainActivity extends AppCompatActivity
@@ -390,7 +395,14 @@ public class MainActivity extends AppCompatActivity
     }
 
 
+    public void onClickResetButton(View view) {
+    }
 
+    public void onClickTenButton(View view) {
+    }
+
+    public void onClickFiftyButton(View view) {
+    }
 }
 
 

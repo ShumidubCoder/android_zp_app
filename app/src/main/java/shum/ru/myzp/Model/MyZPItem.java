@@ -1,4 +1,4 @@
-package shum.ru.myzp;
+package shum.ru.myzp.Model;
 public class MyZPItem {
 
 

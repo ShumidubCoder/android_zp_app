@@ -1,4 +1,4 @@
-package shum.ru.myzp;
+package shum.ru.myzp.Controller;
 
 import android.app.Activity;
 import android.content.Context;
@@ -14,11 +14,11 @@ import static java.security.AccessController.getContext;
 public class Validator {
 
 
-    final String [] MONTH = {"01","02","03","04","05","06","07","08","09","10","11","12"};
-    final String [] TYPE = {"AV", "ZP"};
+    public final String [] MONTH = {"01","02","03","04","05","06","07","08","09","10","11","12"};
+    public final String [] TYPE = {"AV", "ZP"};
 
     final int RESULT_OK = 5;
-    final int RESULT_ERROR = 7;
+    public final int RESULT_ERROR = 7;
 
     boolean textIsValide;
 

@@ -1,10 +1,7 @@
-package shum.ru.myzp;
+package shum.ru.myzp.Controller;
 
 import android.annotation.SuppressLint;
 import android.graphics.Color;
-import android.support.annotation.ColorInt;
-import android.support.annotation.ColorRes;
-import android.support.v4.content.res.ResourcesCompat;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -13,8 +10,10 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import java.util.ArrayList;
 import java.util.List;
+
+import shum.ru.myzp.Model.MyZPItem;
+import shum.ru.myzp.R;
 
 /**
  * Created by user on 10/9/17.
@@ -97,7 +96,7 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.ItemViewHolder> {
 
     private List<MyZPItem> myZPItems;
 
-    RVAdapter(List<MyZPItem> myZPItems){
+    public RVAdapter(List<MyZPItem> myZPItems){
         this.myZPItems = myZPItems;
     }
 

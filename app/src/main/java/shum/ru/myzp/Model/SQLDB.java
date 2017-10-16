@@ -1,7 +1,5 @@
-package shum.ru.myzp;
+package shum.ru.myzp.Model;
 
-import android.annotation.SuppressLint;
-import android.app.Instrumentation;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
