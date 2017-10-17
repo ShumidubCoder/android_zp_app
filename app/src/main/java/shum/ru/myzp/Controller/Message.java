@@ -1,6 +1,7 @@
 package shum.ru.myzp.Controller;
 
 import android.content.Context;
+import android.util.Log;
 import android.widget.Toast;
 
 /**
@@ -15,10 +16,14 @@ public class Message {
     }
 
 
+
     public static void longToast(Context context, String message){
         Toast.makeText(context, message, Toast.LENGTH_LONG).show();
     }
 
+    public static void debugLog(String message){
+        Log.d("DEBUG_LOG", message);
+    }
 
 
 

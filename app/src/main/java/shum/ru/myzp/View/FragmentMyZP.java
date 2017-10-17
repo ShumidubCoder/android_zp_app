@@ -1,109 +1,294 @@
 package shum.ru.myzp.View;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import shum.ru.myzp.Controller.ClickListener;
+import shum.ru.myzp.Controller.Message;
+import shum.ru.myzp.Controller.RVAdapter;
+import shum.ru.myzp.Controller.RecyclerTouchListener;
+import shum.ru.myzp.Model.MyZPItem;
+import shum.ru.myzp.Model.SQLDB;
 import shum.ru.myzp.R;
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link FragmentMyZP.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link FragmentMyZP#newInstance} factory method to
- * create an instance of this fragment.
- */
-public class FragmentMyZP extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+public class FragmentMyZP extends Fragment
+        implements SwipeRefreshLayout.OnRefreshListener {
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
 
-    private OnFragmentInteractionListener mListener;
+    LinearLayout llTableTitle;
+    LinearLayout llEmpty;
+    SwipeRefreshLayout mSwipeRefreshLayout;
 
-    public FragmentMyZP() {
-        // Required empty public constructor
-    }
+    RecyclerView rv;
+    RecyclerView.LayoutManager rvLayoutManager;
+    RecyclerView.Adapter rvAdapter;
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment FragmentMyZP.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static FragmentMyZP newInstance(String param1, String param2) {
-        FragmentMyZP fragment = new FragmentMyZP();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
+    public SQLDB mydb;
+
+    public List<MyZPItem> myZPItems;
+    public ArrayList<String> idsOfSelectedRowsFromDB;
+
+    View lastView;
+    int lastViewPosition = 0;
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_fragment_my_z, container, false);
+
+
+
+
+        return view;
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+
+
+
+
+
+        //region initialize varables and set clickListener
+        llEmpty = getView().findViewById(R.id.ll_empty_state);
+        llTableTitle = getView().findViewById(R.id.ll_table_title);
+        rv = getView().findViewById(R.id.rv);
+        rvLayoutManager = new LinearLayoutManager(getContext());
+        rv.setLayoutManager(rvLayoutManager);
+
+        //region onItemrecyclerViewListener
+        rv.addOnItemTouchListener(new RecyclerTouchListener(getContext(),
+                rv, new ClickListener() {
+
+
+            @Override
+            public void onClick(View view, final int position) {
+
+                lastView = view;
+                lastViewPosition = position;
+
+
+                setAlpha(view, position);
+
+
+
+                TextView tvID = view.findViewById(R.id.id_from_database);
+                String idFromDB = tvID.getText().toString();
+
+                if (idsOfSelectedRowsFromDB == null
+                        || !idsOfSelectedRowsFromDB.contains(idFromDB)){
+                    idsOfSelectedRowsFromDB.add(idFromDB);
+                } else if (idsOfSelectedRowsFromDB.contains(idFromDB)){
+                    idsOfSelectedRowsFromDB.remove(idFromDB);
+                }
+
+
+                //todo invalidateOptionsMenu();
+
+
+
+
+
+
+
+
+
+
+//
+//                Toast.makeText(MainActivity.this, "Single Click on item with id        :"+idFromDB,
+//                        Toast.LENGTH_SHORT).show();
+            }
+
+
+
+
+            public void setAlpha(View view, int position){
+
+
+
+
+                if (rv.getChildAdapterPosition(view) == position) {
+
+
+                    if (view.getAlpha() != 1f)  view.setAlpha(1f);
+                    else   view.setAlpha(0.5f);
+
+
+                }else if (rv.getChildAdapterPosition(view) != position){
+                    view.setAlpha(1f);
+                }
+            }
+
+
+
+
+
+
+
+
+
+            @Override
+            public void onLongClick(View view, int position) {
+
+                TextView tvID = view.findViewById(R.id.id_from_database);
+                String idFromDB = tvID.getText().toString();
+
+//                Toast.makeText(MainActivity.this, "Long Click on item with id        :"+ idFromDB,
+//                        Toast.LENGTH_LONG).show();
+            }
+
+
+
+        }));
+
+
+
+        //endregion
+
+        idsOfSelectedRowsFromDB = new ArrayList<String>(){};
+        if (mydb == null) mydb = new SQLDB(getContext());
+
+        mSwipeRefreshLayout = getView().findViewById(R.id.swipe_container);
+        mSwipeRefreshLayout.setOnRefreshListener(this);
+        //endregion
+
+        initializeData();
+        initializeAdapter();
+
+
+
+
+
+        super.onViewCreated(view, savedInstanceState);
+    }
+
+    @Override
+    public void onResume() {
+        initializeData();
+        initializeAdapter();
+        super.onResume();
+    }
+
+    @Override
+    public void onStart() {
+        initializeData();
+        initializeAdapter();
+        super.onStart();
+    }
+
+    //region intialize Data and Adapter
+    public void initializeData(){
+        this.myZPItems = mydb.readBDFromStartToEnd(getContext());
+
+        if (myZPItems.isEmpty()) setEmptyState(true);
+        else setEmptyState(false);
+    }
+
+    public void initializeAdapter() {
+        rvAdapter = new RVAdapter(this.myZPItems);
+        rv.setAdapter(rvAdapter);
+
+        if (lastViewPosition != 0){
+            try {
+                rv.scrollToPosition(lastViewPosition);
+                lastView = null;
+                lastViewPosition = 0;
+            }catch(NullPointerException e){
+                Message.shortToast(getContext(), "position is 0");
+                rv.scrollToPosition(this.myZPItems.size() - 1);
+                lastViewPosition = 0;
+            }
+        } else rv.scrollToPosition(this.myZPItems.size() - 1);
+
+
+        setLastViewAsNull();
+    }
+    //endregion
+
+
+
+    //region onRefresh (for mRecyclerTouchListener)
+    @Override
+    public void onRefresh() {
+        initializeData();
+        initializeAdapter();
+        idsOfSelectedRowsFromDB.clear();
+        // todo invalidateOptionsMenu();
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                mSwipeRefreshLayout.setRefreshing(false);
+            }
+        }, 700);
+    }
+    //endregion
+
+
+    //region setAlphForView
+    public void setAlphaForView(View view) {
+        if (view.getAlpha() != 1f) view.setAlpha(1f);
+        else view.setAlpha(0.5f);
+    }
+    //endregion
+
+
+    //region setEmptyState
+    public void setEmptyState(boolean isSet){
+        if (isSet) {
+            llTableTitle.setVisibility(View.GONE);
+            rv.setVisibility(View.GONE);
+            llEmpty.setVisibility(View.VISIBLE);
+        } else if (!isSet){
+            llTableTitle.setVisibility(View.VISIBLE);
+            rv.setVisibility(View.VISIBLE);
+            llEmpty.setVisibility(View.GONE);
         }
     }
+    //endregion
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_fragment_my_z, container, false);
+
+
+    //region alletDialogHelp
+    private void alletDialogHelp(){
+        final AlertDialog.Builder alertMessage = new AlertDialog.Builder(getContext());
+        alertMessage.setMessage(R.string.string_help);
+        alertMessage.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {}
+        });
+        alertMessage.create().show();
+    }
+    //endregion
+
+
+    public void setLastViewAsNull() {
+        if(lastView != null)lastView = null;
+
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
-    }
-
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        if (context instanceof OnFragmentInteractionListener) {
-            mListener = (OnFragmentInteractionListener) context;
-        } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
-        }
-    }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        mListener = null;
-    }
-
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
-    public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        void onFragmentInteraction(Uri uri);
-    }
 }
+
+
+
+
+
+
+
+
