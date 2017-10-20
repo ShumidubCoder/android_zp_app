@@ -4,11 +4,52 @@
     android:layout_height="match_parent"
     tools:context="shum.ru.myzp.View.FragmentMetersData">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Meters data blank fragment"
-        android:layout_gravity="center"/>
+
+
+ <RelativeLayout
+     android:layout_width="match_parent"
+     android:layout_height="match_parent">
+
+
+
+     <ScrollView
+         android:layout_width="match_parent"
+         android:layout_height="match_parent"
+         android:layout_alignParentTop="true"
+         android:layout_alignEnd="@+id/llDataMeterAddViews">
+
+
+         <android.support.v7.widget.RecyclerView
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+             android:id="@+id/rvDataMeters"/>
+
+     </ScrollView>
+
+
+         <LinearLayout
+             android:id="@+id/llDataMeterAddViews"
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:orientation="horizontal"
+             android:layout_alignParentBottom="true">
+
+
+             <EditText
+                 android:id="@+id/etDataMeters"
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+                 android:layout_weight="5"/>
+
+         </LinearLayout>
+
+
+
+ </RelativeLayout>
+
+
+
+
 
 </FrameLayout>
+

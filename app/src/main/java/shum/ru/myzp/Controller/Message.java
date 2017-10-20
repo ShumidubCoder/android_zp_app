@@ -1,8 +1,12 @@
 package shum.ru.myzp.Controller;
 
+import android.app.Activity;
+import android.app.Application;
 import android.content.Context;
 import android.util.Log;
 import android.widget.Toast;
+
+import static java.security.AccessController.getContext;
 
 /**
  * Created by user on 10/16/17.

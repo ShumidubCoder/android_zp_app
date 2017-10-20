@@ -1,5 +1,6 @@
 package shum.ru.myzp.View;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -7,6 +8,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
@@ -16,6 +18,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,21 +35,24 @@ public class FragmentMyZP extends Fragment
         implements SwipeRefreshLayout.OnRefreshListener {
 
 
-    LinearLayout llTableTitle;
-    LinearLayout llEmpty;
+    static LinearLayout llTableTitle;
+    static LinearLayout llEmpty;
     SwipeRefreshLayout mSwipeRefreshLayout;
 
-    RecyclerView rv;
+    static RecyclerView rv;
     RecyclerView.LayoutManager rvLayoutManager;
-    RecyclerView.Adapter rvAdapter;
+    static RecyclerView.Adapter rvAdapter;
 
-    public SQLDB mydb;
+    public static SQLDB mydb;
 
-    public List<MyZPItem> myZPItems;
-    public ArrayList<String> idsOfSelectedRowsFromDB;
+    public static List<MyZPItem> myZPItems;
+    public static ArrayList<String> idsOfSelectedRowsFromDB;
 
-    View lastView;
-    int lastViewPosition = 0;
+    public static View lastView;
+    static int lastViewPosition = 0;
+
+
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -62,15 +68,14 @@ public class FragmentMyZP extends Fragment
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
 
 
-
-
-
         //region initialize varables and set clickListener
         llEmpty = getView().findViewById(R.id.ll_empty_state);
         llTableTitle = getView().findViewById(R.id.ll_table_title);
         rv = getView().findViewById(R.id.rv);
         rvLayoutManager = new LinearLayoutManager(getContext());
         rv.setLayoutManager(rvLayoutManager);
+
+
 
         //region onItemrecyclerViewListener
         rv.addOnItemTouchListener(new RecyclerTouchListener(getContext(),
@@ -86,8 +91,6 @@ public class FragmentMyZP extends Fragment
 
                 setAlpha(view, position);
 
-
-
                 TextView tvID = view.findViewById(R.id.id_from_database);
                 String idFromDB = tvID.getText().toString();
 
@@ -99,10 +102,14 @@ public class FragmentMyZP extends Fragment
                 }
 
 
-                //todo invalidateOptionsMenu();
+                if (MainActivity.ll_myZP_add_FAB.getVisibility() == View.VISIBLE) {
+                        MainActivity.setAddAndDeleteFABSEnable();
+                }
 
 
 
+
+                //todo invalidateOptionsMenu();  todo edit and delete as group and i ftrue visible or not
 
 
 
@@ -119,25 +126,13 @@ public class FragmentMyZP extends Fragment
 
 
             public void setAlpha(View view, int position){
-
-
-
-
                 if (rv.getChildAdapterPosition(view) == position) {
-
-
                     if (view.getAlpha() != 1f)  view.setAlpha(1f);
                     else   view.setAlpha(0.5f);
-
-
                 }else if (rv.getChildAdapterPosition(view) != position){
                     view.setAlpha(1f);
                 }
             }
-
-
-
-
 
 
 
@@ -168,7 +163,7 @@ public class FragmentMyZP extends Fragment
         mSwipeRefreshLayout.setOnRefreshListener(this);
         //endregion
 
-        initializeData();
+        initializeData(getContext());
         initializeAdapter();
 
 
@@ -180,28 +175,35 @@ public class FragmentMyZP extends Fragment
 
     @Override
     public void onResume() {
-        initializeData();
+        initializeData(getContext());
         initializeAdapter();
         super.onResume();
     }
 
     @Override
     public void onStart() {
-        initializeData();
+        initializeData(getContext());
         initializeAdapter();
         super.onStart();
     }
 
     //region intialize Data and Adapter
     public void initializeData(){
-        this.myZPItems = mydb.readBDFromStartToEnd(getContext());
+        myZPItems = mydb.readBDFromStartToEnd(getContext());
 
         if (myZPItems.isEmpty()) setEmptyState(true);
         else setEmptyState(false);
     }
 
-    public void initializeAdapter() {
-        rvAdapter = new RVAdapter(this.myZPItems);
+    public static void initializeData(Context context){
+        myZPItems = mydb.readBDFromStartToEnd(context);
+
+        if (myZPItems.isEmpty()) setEmptyState(true);
+        else setEmptyState(false);
+    }
+
+    public static void initializeAdapter() {
+        rvAdapter = new RVAdapter(myZPItems);
         rv.setAdapter(rvAdapter);
 
         if (lastViewPosition != 0){
@@ -210,12 +212,11 @@ public class FragmentMyZP extends Fragment
                 lastView = null;
                 lastViewPosition = 0;
             }catch(NullPointerException e){
-                Message.shortToast(getContext(), "position is 0");
-                rv.scrollToPosition(this.myZPItems.size() - 1);
+                Message.debugLog("position is 0");
+                rv.scrollToPosition(myZPItems.size() - 1);
                 lastViewPosition = 0;
             }
-        } else rv.scrollToPosition(this.myZPItems.size() - 1);
-
+        } else rv.scrollToPosition(myZPItems.size() - 1);
 
         setLastViewAsNull();
     }
@@ -226,7 +227,7 @@ public class FragmentMyZP extends Fragment
     //region onRefresh (for mRecyclerTouchListener)
     @Override
     public void onRefresh() {
-        initializeData();
+        initializeData(getContext());
         initializeAdapter();
         idsOfSelectedRowsFromDB.clear();
         // todo invalidateOptionsMenu();
@@ -250,7 +251,7 @@ public class FragmentMyZP extends Fragment
 
 
     //region setEmptyState
-    public void setEmptyState(boolean isSet){
+    public static void setEmptyState(boolean isSet){
         if (isSet) {
             llTableTitle.setVisibility(View.GONE);
             rv.setVisibility(View.GONE);
@@ -265,23 +266,17 @@ public class FragmentMyZP extends Fragment
 
 
 
-    //region alletDialogHelp
-    private void alletDialogHelp(){
-        final AlertDialog.Builder alertMessage = new AlertDialog.Builder(getContext());
-        alertMessage.setMessage(R.string.string_help);
-        alertMessage.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {}
-        });
-        alertMessage.create().show();
-    }
-    //endregion
 
 
-    public void setLastViewAsNull() {
+
+    public static void setLastViewAsNull() {
         if(lastView != null)lastView = null;
 
     }
+
+
+
+
 
 }
 
@@ -291,4 +286,4 @@ public class FragmentMyZP extends Fragment
 
 
 
-
+//todo не очистилось

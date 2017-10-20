@@ -27,7 +27,6 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.ItemViewHolder> {
 
         CardView cv;
 
-
         TextView tvIdFromDB;
         TextView tvForMounth;
         TextView tvDate;
@@ -76,11 +75,6 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.ItemViewHolder> {
         if ((myZPItems.get(i).type).contains("ZP")) itemHolder.llZP.setBackgroundColor(Color.WHITE);
 //        else if (!(myZPItems.get(i).type).contains("ZP")) return;
         else if (!(myZPItems.get(i).type).contains("ZP")) itemHolder.llZP.setBackgroundColor(Color.parseColor("#9269d2f5"));
-
-
-
-
-
 
     }
 

@@ -5,13 +5,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".View.MainActivity">
 
 
     <android.support.design.widget.TabLayout
         android:id="@+id/tab_layout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="40dp"
         android:layout_below="@+id/toolbar"
         android:background="?attr/colorPrimary"
         android:elevation="6dp"
@@ -33,7 +33,170 @@
         android:layout_marginBottom="18dp"
         android:layout_marginRight="18dp"
         android:clickable="true"
-        android:src="@drawable/ic_add_24"
+        app:fabSize="normal"
+        android:src="@drawable/ic_add_white_24dp"
         android:onClick="onMainFloatingButtonClick" />
+
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/ll_my_zp_add_edit_and_delete_FABS"
+        android:layout_above="@+id/ll_my_zp_add_FABS"
+        android:layout_marginRight="18dp"
+        android:layout_alignParentEnd="true"
+        android:orientation="vertical">
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fab_my_zp_3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:layout_margin="@dimen/fab_margin"
+            android:clickable="true"
+            android:visibility="visible"
+            android:onClick="onDeleteSubmenuFABClick"
+            app:fabSize="mini"
+            app:srcCompat="@drawable/ic_de_24" />
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fab_my_zp_2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:layout_margin="@dimen/fab_margin"
+            android:clickable="true"
+            android:visibility="visible"
+            android:onClick="onEditSubmenuFABClick"
+            app:fabSize="mini"
+            app:srcCompat="@drawable/ic_edit_24" />
+
+    </LinearLayout>
+
+
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/ll_my_zp_add_FABS"
+        android:layout_above="@+id/floatingActionButton"
+        android:layout_marginRight="18dp"
+        android:layout_marginBottom="10dp"
+        android:layout_alignParentEnd="true"
+        android:orientation="vertical">
+
+
+
+
+        <android.support.design.widget.FloatingActionButton
+
+            android:id="@+id/fab_my_zp_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:layout_margin="@dimen/fab_margin"
+            android:clickable="true"
+            android:visibility="visible"
+            android:onClick="onAddSubmenuFABClick"
+            app:fabSize="mini"
+            app:srcCompat="@drawable/ic_add_white_24dp" />
+
+
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/ll_help_fab"
+        android:layout_below="@+id/ll_my_zp_add_FABS"
+        android:layout_toStartOf="@+id/floatingActionButton"
+        android:paddingRight="8dp">
+
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fab_my_zp_4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:layout_margin="@dimen/fab_margin"
+            android:clickable="true"
+            android:onClick="onHelpSubmenuFABClick"
+            android:visibility="visible"
+            app:fabSize="mini"
+            app:srcCompat="@drawable/ic_help_white_24dp"
+            />
+
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/ll_data_meter_add_edit_and_delete_FABS"
+        android:layout_above="@+id/ll_data_meter_FABS"
+        android:layout_marginRight="18dp"
+        android:layout_alignParentEnd="true"
+        android:orientation="vertical">
+
+            <android.support.design.widget.FloatingActionButton
+                android:id="@+id/fab_delete_data_meter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|end"
+                android:layout_margin="@dimen/fab_margin"
+                android:clickable="true"
+                android:visibility="visible"
+                android:onClick="onDeleteSubmenuFABClick"
+                app:fabSize="mini"
+                app:srcCompat="@drawable/ic_de_24" />
+
+            <android.support.design.widget.FloatingActionButton
+                android:id="@+id/fab_edit_data_meter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|end"
+                android:layout_margin="@dimen/fab_margin"
+                android:clickable="true"
+                android:visibility="visible"
+                android:onClick="onEditSubmenuFABClick"
+                app:fabSize="mini"
+                app:srcCompat="@drawable/ic_edit_24" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/ll_data_meter_FABS"
+        android:layout_above="@+id/floatingActionButton"
+        android:layout_marginRight="18dp"
+        android:layout_marginBottom="10dp"
+        android:layout_alignParentEnd="true"
+        android:orientation="vertical">
+
+
+
+
+        <android.support.design.widget.FloatingActionButton
+
+            android:id="@+id/fab_add_data_meter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:layout_margin="@dimen/fab_margin"
+            android:clickable="true"
+            android:visibility="visible"
+            android:onClick="onAddSubmenuFABClick"
+            app:fabSize="mini"
+            app:srcCompat="@drawable/ic_add_white_24dp" />
+
+
+
+    </LinearLayout>
+
+
 
 </RelativeLayout>
