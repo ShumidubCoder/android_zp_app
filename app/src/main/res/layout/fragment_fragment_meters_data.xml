@@ -33,6 +33,9 @@
              android:text="COOL TEXT"
              android:gravity="center_horizontal"
              android:layout_gravity="center_horizontal"
+            android:clickable="true"
+            android:onClick="onClickTextViewDataMeters"
+
             />
 
     </ScrollView>

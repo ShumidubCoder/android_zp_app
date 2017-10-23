@@ -53,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
     ControllerMyZpFragment mControllerMyZpFragment;
     List<LinearLayout> mLinearLayoutListFABS;
 
-
+    int count;
 
 
 
@@ -91,7 +91,7 @@ public class MainActivity extends AppCompatActivity {
 
         mainFloatingButtonMini.setVisibility(View.INVISIBLE);
 
-
+        count = 0;
 
 
         //todo maybe disapear or drawer tabs
@@ -359,6 +359,34 @@ public class MainActivity extends AppCompatActivity {
 
 
 
+    }
+
+    public void onClickTextViewDataMeters(View view) {
+
+        final String KEY_DATA_METERS_STRING = "DATA_METERS_STRING_VALUE";
+        TextView tvCoolText = findViewById(R.id.tvCoolText);
+        EditText edEditString = findViewById(R.id.etDataMeters);
+        String textToCopy = SPhelper.getSharedPreference(this, KEY_DATA_METERS_STRING, "" );
+
+        setCountIncrement();
+
+        if (this.count > 7) Toast.makeText(this, count + "/10 to delete and edit", Toast.LENGTH_SHORT ).show();
+        else if (count == 1) tvCoolText.setText(textToCopy);
+
+        if (this.count%10==0){
+
+
+            tvCoolText.setText(" ");
+            edEditString.setText(textToCopy);
+            SPhelper.putSharedPreference(this, KEY_DATA_METERS_STRING, "");
+        }
+
+
+    }
+
+
+    public void setCountIncrement(){
+        this.count +=1;
     }
 
     //endregion
