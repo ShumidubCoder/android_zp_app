@@ -327,6 +327,7 @@ public class MainActivity extends AppCompatActivity {
         mainFloatingButtonMini.setRippleColor(Color.RED);
         TextView tvCoolText = findViewById(R.id.tvCoolText);
         tvCoolText.setText(((EditText)findViewById(R.id.etDataMeters)).getText().toString());
+        ((EditText) findViewById(R.id.etDataMeters)).setText("");
 
 
     }
