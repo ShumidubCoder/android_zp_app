@@ -37,6 +37,19 @@
         android:src="@drawable/ic_add_white_24dp"
         android:onClick="onMainFloatingButtonClick" />
 
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/floatingActionButtonMini"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginBottom="12dp"
+        android:layout_marginRight="4dp"
+        android:clickable="true"
+        app:fabSize="mini"
+        android:src="@drawable/ic_add_white_24dp"
+        android:onClick="onMainFloatingButtonClickMini" />
+
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -141,30 +154,6 @@
         android:layout_alignParentEnd="true"
         android:orientation="vertical">
 
-            <android.support.design.widget.FloatingActionButton
-                android:id="@+id/fab_delete_data_meter"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="bottom|end"
-                android:layout_margin="@dimen/fab_margin"
-                android:clickable="true"
-                android:visibility="visible"
-                android:onClick="onDeleteSubmenuFABClick"
-                app:fabSize="mini"
-                app:srcCompat="@drawable/ic_de_24" />
-
-            <android.support.design.widget.FloatingActionButton
-                android:id="@+id/fab_edit_data_meter"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="bottom|end"
-                android:layout_margin="@dimen/fab_margin"
-                android:clickable="true"
-                android:visibility="visible"
-                android:onClick="onEditSubmenuFABClick"
-                app:fabSize="mini"
-                app:srcCompat="@drawable/ic_edit_24" />
-
     </LinearLayout>
 
     <LinearLayout
@@ -180,18 +169,7 @@
 
 
 
-        <android.support.design.widget.FloatingActionButton
 
-            android:id="@+id/fab_add_data_meter"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom|end"
-            android:layout_margin="@dimen/fab_margin"
-            android:clickable="true"
-            android:visibility="visible"
-            android:onClick="onAddSubmenuFABClick"
-            app:fabSize="mini"
-            app:srcCompat="@drawable/ic_add_white_24dp" />
 
 
 

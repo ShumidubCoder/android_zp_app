@@ -42,22 +42,16 @@ public class FragmentMetersData extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        rv = getView().findViewById(R.id.rvDataMeters);
+
         etDataMeters = getView().findViewById(R.id.etDataMeters);
 
-        rvLayoutManager = new LinearLayoutManager(getContext());
-        rv.setLayoutManager(rvLayoutManager);
 
-        initializeAdapter();
+
 
     }
 
 
-    public static void initializeAdapter() {
-        //todo
-        rvAdapter = new RVAdapterDataMeters();
-        rv.setAdapter(rvAdapter);
-    }
+
 
 
 

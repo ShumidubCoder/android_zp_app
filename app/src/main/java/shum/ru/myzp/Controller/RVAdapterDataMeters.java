@@ -66,9 +66,7 @@ public class RVAdapterDataMeters extends RecyclerView.Adapter<RVAdapterDataMeter
     }
 
 
-    public RVAdapterDataMeters(){
-        lstItemsDM = MainActivity.staticLstItemsDM;
-    }
+
 
     @Override
     public void onAttachedToRecyclerView(RecyclerView recyclerView) {

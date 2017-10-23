@@ -1,6 +1,7 @@
 package shum.ru.myzp.View;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
@@ -10,7 +11,10 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.TextView;
+import android.widget.Toast;
 
 
 import java.util.Arrays;
@@ -32,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
 
     static TabLayout tabLayout;
     FloatingActionButton mainFloatingButton;
+    FloatingActionButton mainFloatingButtonMini;
     static LinearLayout ll_myZP_add_FAB;
     LinearLayout llDataMetersFAB;
     static LinearLayout llHelpFAB;
@@ -46,10 +51,6 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-    public DBDataMeters mDBDataMeters = new DBDataMeters(this);
-    public static List<ItemDataMeters> staticLstItemsDM;
-    public List<ItemDataMeters> lstItemsDM = mDBDataMeters.dbToArray();
-
 
 
 
@@ -62,6 +63,7 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         mainFloatingButton = findViewById(R.id.floatingActionButton);
+        mainFloatingButtonMini = findViewById(R.id.floatingActionButtonMini);
         ll_myZP_add_FAB = findViewById(R.id.ll_my_zp_add_FABS);
         llDataMetersFAB = findViewById(R.id.ll_data_meter_FABS);
         llHelpFAB = findViewById(R.id.ll_help_fab);
@@ -73,8 +75,6 @@ public class MainActivity extends AppCompatActivity {
 
         mControllerMyZpFragment = new ControllerMyZpFragment();
 
-        staticLstItemsDM = lstItemsDM;
-
 
         ll_my_zp_edit_and_delete_FABS = findViewById(R.id.ll_my_zp_add_edit_and_delete_FABS);
         ll_data_meter_edit_amd_delete_FABS = findViewById(R.id.ll_data_meter_add_edit_and_delete_FABS);
@@ -84,6 +84,8 @@ public class MainActivity extends AppCompatActivity {
 
         openAlpha = AnimationUtils.loadAnimation(this, R.anim.anim_fab_open);
         hideAlpha = AnimationUtils.loadAnimation(this, R.anim.anim_fab_hide);
+
+        mainFloatingButtonMini.setVisibility(View.INVISIBLE);
 
 
 
@@ -106,6 +108,10 @@ public class MainActivity extends AppCompatActivity {
             public void onTabSelected(TabLayout.Tab tab) {
                 viewPager.setCurrentItem(tab.getPosition());
                 if (tabLayout.getSelectedTabPosition() == 1) mainFloatingButton.setVisibility(View.INVISIBLE);
+                else if (tabLayout.getSelectedTabPosition() == 2){
+                    mainFloatingButton.setVisibility(View.INVISIBLE);
+                    mainFloatingButtonMini.setVisibility(View.VISIBLE);
+                }
                 else {
                     mainFloatingButton.setVisibility(View.VISIBLE);
                     setAddAndDeleteFABSEnable();
@@ -161,12 +167,13 @@ public class MainActivity extends AppCompatActivity {
     //appear/disapear FAB
     public void switcherFABsByTabs(){
 
-
-
-
         switch (tabLayout.getSelectedTabPosition()) {
             //myzp
             case 0:
+
+                mainFloatingButton.setVisibility(View.VISIBLE);
+                mainFloatingButtonMini.setVisibility(View.INVISIBLE);
+
                 if (fabMenuIsClicked) disapperaFabSubmenu();
                 else if (!fabMenuIsClicked) showFabSubmenu();
                 break;
@@ -177,6 +184,10 @@ public class MainActivity extends AppCompatActivity {
 
             //MetersData
             case 2:
+
+               mainFloatingButton.setVisibility(View.INVISIBLE);
+               mainFloatingButtonMini.setVisibility(View.VISIBLE);
+
                 if (fabMenuIsClicked) disapperaFabSubmenu();
                 else if (!fabMenuIsClicked) showFabSubmenu();
                 break;
@@ -310,6 +321,14 @@ public class MainActivity extends AppCompatActivity {
         } else if (tabLayout.getSelectedTabPosition() == 0) {
             // todo add
         }
+    }
+
+    public void onMainFloatingButtonClickMini(View view) {
+        mainFloatingButtonMini.setRippleColor(Color.RED);
+        TextView tvCoolText = findViewById(R.id.tvCoolText);
+        tvCoolText.setText(((EditText)findViewById(R.id.etDataMeters)).getText().toString());
+
+
     }
 
     //endregion
