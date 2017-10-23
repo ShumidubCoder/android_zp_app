@@ -41,6 +41,176 @@
     </ScrollView>
 
 
+     <HorizontalScrollView
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         app:layout_constraintBottom_toTopOf="@id/hsv"
+         android:scrollbars="none">
+
+         <LinearLayout
+             android:layout_width="match_parent"
+             android:layout_height="0dp"
+             android:orientation="horizontal"
+             android:id="@+id/llDateSuggest2"
+             >
+
+             <Button
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:text="date"
+                 android:onClick="onClickDateAdd"
+                 android:id="@+id/btnAddDate2"/>
+
+             <Button
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:text="111111"/>
+
+             <Button
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:text="222222"/>
+
+             <Button
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:text="3333333"/>
+
+             <Button
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:text="4444444"/>
+
+             <Button
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:text="555555"/>
+
+             <Button
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:text="6666666"/>
+
+             <Button
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content" />
+
+             <Button
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content" />
+
+             <Button
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content" />
+
+             <Button
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content" />
+
+             <Button
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content" />
+
+             <Button
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content" />
+
+
+
+
+
+         </LinearLayout>
+
+     </HorizontalScrollView>
+
+
+     <HorizontalScrollView
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         app:layout_constraintBottom_toTopOf="@id/llDataMeterAddViews"
+         android:paddingBottom="6dp"
+         android:scrollbars="none"
+         android:id="@+id/hsv">
+
+         <LinearLayout
+             android:layout_width="match_parent"
+             android:layout_height="0dp"
+             android:orientation="horizontal"
+             android:id="@+id/llDateSuggest"
+             >
+
+             <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="date"
+                android:onClick="onClickDateAdd"
+                android:id="@+id/btnAddDate"/>
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="open second line"
+                android:onClick="onClickOpenSecondLine"/>
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="222222"/>
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="3333333"/>
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="4444444"/>
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="555555"/>
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="6666666"/>
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+             <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+
+
+
+
+         </LinearLayout>
+
+     </HorizontalScrollView>
+
+
+
      <LinearLayout
          android:id="@+id/llDataMeterAddViews"
          android:layout_width="match_parent"

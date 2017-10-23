@@ -11,16 +11,21 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.HorizontalScrollView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 import shum.ru.myzp.Controller.ControllerMyZpFragment;
@@ -55,6 +60,10 @@ public class MainActivity extends AppCompatActivity {
 
     int count;
 
+    LinearLayout llDateSuggest;
+
+    boolean llDateSuggestIsShowing = false;
+    boolean llDateSuggestIsShowing2 = false;
 
 
 
@@ -93,6 +102,8 @@ public class MainActivity extends AppCompatActivity {
 
         count = 0;
 
+        llDateSuggest = findViewById(R.id.llDateSuggest);
+
 
         //todo maybe disapear or drawer tabs
 
@@ -111,13 +122,17 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                 viewPager.setCurrentItem(tab.getPosition());
-                if (tabLayout.getSelectedTabPosition() == 1) mainFloatingButton.setVisibility(View.INVISIBLE);
+                if (tabLayout.getSelectedTabPosition() == 1){
+                    mainFloatingButton.setVisibility(View.INVISIBLE);
+                    mainFloatingButtonMini.setVisibility(View.INVISIBLE);
+                }
                 else if (tabLayout.getSelectedTabPosition() == 2){
                     mainFloatingButton.setVisibility(View.INVISIBLE);
                     mainFloatingButtonMini.setVisibility(View.VISIBLE);
                 }
                 else {
                     mainFloatingButton.setVisibility(View.VISIBLE);
+                    mainFloatingButtonMini.setVisibility(View.INVISIBLE);
                     setAddAndDeleteFABSEnable();
                 }
 
@@ -349,6 +364,7 @@ public class MainActivity extends AppCompatActivity {
 
             tvCoolText.setText(dataMetersText);
             Toast.makeText(this, "enter the text", Toast.LENGTH_SHORT).show();
+            addDateFoLL();
 
         }
 
@@ -379,6 +395,8 @@ public class MainActivity extends AppCompatActivity {
             tvCoolText.setText(" ");
             edEditString.setText(textToCopy);
             SPhelper.putSharedPreference(this, KEY_DATA_METERS_STRING, "");
+
+            this.count = 0;
         }
 
 
@@ -392,9 +410,75 @@ public class MainActivity extends AppCompatActivity {
     //endregion
 
 
+    public void addDateFoLL(){
+
+        HorizontalScrollView.LayoutParams lp = new HorizontalScrollView.LayoutParams(HorizontalScrollView.LayoutParams.MATCH_PARENT,
+                        HorizontalScrollView.LayoutParams.WRAP_CONTENT);
+
+        HorizontalScrollView.LayoutParams lp2 = new HorizontalScrollView.LayoutParams(HorizontalScrollView.LayoutParams.MATCH_PARENT,
+                        0);
+
+        llDateSuggest = findViewById(R.id.llDateSuggest);
+
+        if (llDateSuggestIsShowing){
+            llDateSuggest.setLayoutParams(lp2);
+            llDateSuggestIsShowing = false;
+        }
+        else {
+            llDateSuggest.setLayoutParams(lp);
+            llDateSuggestIsShowing = true;
 
 
 
+        }
+
+        SimpleDateFormat format = new SimpleDateFormat ("dd.mm.yy");
+        Date now = new Date(System.currentTimeMillis());
+        String strDate = format.format(now);
+
+        Button btnAddDate = findViewById(R.id.btnAddDate);
+        btnAddDate.setText(strDate);
+
+
+
+
+
+    }
+
+
+    public void onClickDateAdd(View view) {
+
+        SimpleDateFormat format = new SimpleDateFormat ("dd.mm.yy");
+        Date now = new Date(System.currentTimeMillis());
+        String strDate = format.format(now);
+
+        EditText edEditString = findViewById(R.id.etDataMeters);
+        edEditString.setText(strDate + "  " + edEditString.getText().toString());
+
+
+    }
+
+    public void onClickOpenSecondLine(View view) {
+
+        HorizontalScrollView.LayoutParams lp = new HorizontalScrollView.LayoutParams(HorizontalScrollView.LayoutParams.MATCH_PARENT,
+                HorizontalScrollView.LayoutParams.WRAP_CONTENT);
+
+        HorizontalScrollView.LayoutParams lp2 = new HorizontalScrollView.LayoutParams(HorizontalScrollView.LayoutParams.MATCH_PARENT,
+                0);
+
+        LinearLayout llDateSuggest2 = findViewById(R.id.llDateSuggest2);
+
+        if (llDateSuggestIsShowing2){
+            llDateSuggest2.setLayoutParams(lp2);
+            llDateSuggestIsShowing2 = false;
+        }
+        else {
+            llDateSuggest2.setLayoutParams(lp);
+            llDateSuggestIsShowing2 = true;
+        }
+
+
+    }
 }
 
 
