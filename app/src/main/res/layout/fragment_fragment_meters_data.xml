@@ -11,22 +11,31 @@
      android:layout_width="match_parent"
      android:layout_height="match_parent">
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="20dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/llDataMeterAddViews"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:id="@+id/svDAtaMeters">
 
-     <TextView
-         android:id="@+id/tvCoolText"
-         android:layout_width="wrap_content"
-         android:layout_height="wrap_content"
-         android:layout_alignParentTop="true"
-         android:layout_centerHorizontal="true"
-         android:layout_marginBottom="0dp"
-         android:layout_marginEnd="8dp"
-         android:layout_marginStart="8dp"
-         android:layout_marginTop="0dp"
-         android:text="COOL TEXT"
-         app:layout_constraintBottom_toTopOf="@+id/llDataMeterAddViews"
-         app:layout_constraintEnd_toEndOf="parent"
-         app:layout_constraintStart_toStartOf="parent"
-         app:layout_constraintTop_toTopOf="parent" />
+        <TextView
+             android:id="@+id/tvCoolText"
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:text="COOL TEXT"
+             android:gravity="center_horizontal"
+             android:layout_gravity="center_horizontal"
+            />
+
+    </ScrollView>
 
 
      <LinearLayout

@@ -27,5 +27,19 @@ public class SPhelper {
         return debit;
     }
 
+    public static void putSharedPreference(Activity activity, String key, String value){
+        SharedPreferences sharedPref = activity.getPreferences(Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putString(key, value);
+        editor.commit();
+    }
+
+
+    public static String getSharedPreference(Activity activity, String key, String defaultValue){
+        SharedPreferences sharedPref = activity.getPreferences(Context.MODE_PRIVATE);
+        String value =  sharedPref.getString(key, defaultValue);
+        return value;
+    }
+
 
 }

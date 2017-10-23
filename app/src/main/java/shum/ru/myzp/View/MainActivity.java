@@ -1,8 +1,10 @@
 package shum.ru.myzp.View;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
@@ -13,6 +15,7 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,6 +29,7 @@ import shum.ru.myzp.Controller.PagerAdapter;
 import shum.ru.myzp.Model.DBDataMeters;
 import shum.ru.myzp.Model.DBHelperDataMeters;
 import shum.ru.myzp.Model.ItemDataMeters;
+import shum.ru.myzp.Model.SPhelper;
 import shum.ru.myzp.R;
 
 import static shum.ru.myzp.View.FragmentMyZP.idsOfSelectedRowsFromDB;
@@ -324,10 +328,35 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onMainFloatingButtonClickMini(View view) {
-        mainFloatingButtonMini.setRippleColor(Color.RED);
+
+        String dataMetersText;
         TextView tvCoolText = findViewById(R.id.tvCoolText);
-        tvCoolText.setText(((EditText)findViewById(R.id.etDataMeters)).getText().toString());
-        ((EditText) findViewById(R.id.etDataMeters)).setText("");
+        EditText edEditString = findViewById(R.id.etDataMeters);
+        final String KEY_DATA_METERS_STRING = "DATA_METERS_STRING_VALUE";
+        ScrollView csDataMeters = (ScrollView) findViewById(R.id.svDAtaMeters);
+        dataMetersText = SPhelper.getSharedPreference(this, KEY_DATA_METERS_STRING, "" );
+        mainFloatingButtonMini.setRippleColor(Color.RED);
+
+
+        if (!edEditString.getText().toString().isEmpty()){
+            dataMetersText = dataMetersText + "\n" + edEditString.getText().toString();
+            SPhelper.putSharedPreference(this, KEY_DATA_METERS_STRING, dataMetersText);
+
+            tvCoolText.setText(dataMetersText);
+            edEditString.setText("");
+
+        }else if (edEditString.getText().toString().isEmpty()) {
+
+            tvCoolText.setText(dataMetersText);
+            Toast.makeText(this, "enter the text", Toast.LENGTH_SHORT).show();
+
+        }
+
+
+
+        csDataMeters.fullScroll(ScrollView.FOCUS_DOWN);
+
+
 
 
     }
