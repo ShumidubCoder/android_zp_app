@@ -1,6 +1,7 @@
 package shum.ru.myzp.View;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -8,6 +9,7 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -478,6 +480,35 @@ public class MainActivity extends AppCompatActivity {
         }
 
 
+    }
+
+
+    @Override
+    public void onBackPressed() {
+
+
+        if(tabLayout.getSelectedTabPosition() == 2) {
+            AlertDialog.Builder quitDialog = new AlertDialog.Builder(
+                    MainActivity.this);
+            quitDialog.setTitle("Are you really want to exit?");
+
+            quitDialog.setPositiveButton("exit", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    // TODO Auto-generated method stub
+                    finish();
+                }
+            });
+
+            quitDialog.setNegativeButton("NOT EXIT", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    // TODO Auto-generated method stub
+                }
+            });
+
+            quitDialog.show();
+        }else super.onBackPressed();
     }
 }
 
