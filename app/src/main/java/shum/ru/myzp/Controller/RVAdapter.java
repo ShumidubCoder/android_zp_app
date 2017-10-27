@@ -1,6 +1,7 @@
 package shum.ru.myzp.Controller;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.graphics.Color;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
@@ -64,7 +65,7 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.ItemViewHolder> {
         itemHolder.tvIdFromDB.setText(setId);
 
 
-        itemHolder.tvForMounth.setText(myZPItems.get(i).forMounth + "_" + myZPItems.get(i).type);
+        itemHolder.tvForMounth.setText(myZPItems.get(i).forMounth + " " + myZPItems.get(i).type);
         itemHolder.tvDate.setText(myZPItems.get(i).date);
         itemHolder.tvValue.setText(myZPItems.get(i).value);
 
@@ -72,9 +73,8 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.ItemViewHolder> {
         itemHolder.tvStsValue.setText(myZPItems.get(i).stsValue);
 
 
-//        if ((myZPItems.get(i).type).contains("ZP")) itemHolder.llZP.setBackgroundColor(Color.WHITE);
-////        else if (!(myZPItems.get(i).type).contains("ZP")) return;
-//        else if (!(myZPItems.get(i).type).contains("ZP")) itemHolder.llZP.setBackgroundColor(Color.parseColor("#9269d2f5"));
+        if (Integer.parseInt((myZPItems.get(i).forMounth))%2==0) itemHolder.llZP.setBackgroundColor(Color.parseColor("#603ca19e"));
+
 
     }
 
