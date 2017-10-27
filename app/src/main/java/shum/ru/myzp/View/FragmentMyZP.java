@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -51,6 +52,11 @@ public class FragmentMyZP extends Fragment
     public static View lastView;
     static int lastViewPosition = 0;
 
+    int countClick;
+
+
+    int sumValue;
+
 
 
 
@@ -97,8 +103,13 @@ public class FragmentMyZP extends Fragment
                 if (idsOfSelectedRowsFromDB == null
                         || !idsOfSelectedRowsFromDB.contains(idFromDB)){
                     idsOfSelectedRowsFromDB.add(idFromDB);
+
+                    if(idsOfSelectedRowsFromDB.size() == 1) countClick=1;
+                    if (countClick == 1) showSumm(view);
+
                 } else if (idsOfSelectedRowsFromDB.contains(idFromDB)){
                     idsOfSelectedRowsFromDB.remove(idFromDB);
+                    countClick =0;
                 }
 
 
@@ -106,6 +117,7 @@ public class FragmentMyZP extends Fragment
                         MainActivity.setAddAndDeleteFABSEnable();
                 }
 
+                //showSumm(view);
 
 
 
@@ -141,11 +153,7 @@ public class FragmentMyZP extends Fragment
             @Override
             public void onLongClick(View view, int position) {
 
-                TextView tvID = view.findViewById(R.id.id_from_database);
-                String idFromDB = tvID.getText().toString();
-
-//                Toast.makeText(MainActivity.this, "Long Click on item with id        :"+ idFromDB,
-//                        Toast.LENGTH_LONG).show();
+             //pass
             }
 
 
@@ -173,6 +181,27 @@ public class FragmentMyZP extends Fragment
         super.onViewCreated(view, savedInstanceState);
     }
 
+    public void showSumm(View view){
+        int sumValueResult = 0;
+
+        TextView tvValue = view.findViewById(R.id.value_of_paying);
+        if (sumValue == 0) sumValue = Integer.parseInt(tvValue.getText().toString());
+        else if (sumValue != 0){
+            sumValue = sumValue + Integer.parseInt(tvValue.getText().toString());
+            sumValueResult = sumValue;
+            sumValue = 0;
+        }
+
+
+        double d = (sumValueResult/0.87);
+        int sumValueResultAndTax = (int) d;
+
+        if (idsOfSelectedRowsFromDB.size() == 2) {
+            Toast.makeText(getContext(), "Value =   " + sumValueResult + "\nValue + Tax =   " + sumValueResultAndTax,
+                    Toast.LENGTH_SHORT).show();
+        }
+    }
+
     @Override
     public void onResume() {
         initializeData(getContext());
@@ -196,6 +225,7 @@ public class FragmentMyZP extends Fragment
     }
 
     public static void initializeData(Context context){
+
         myZPItems = mydb.readBDFromStartToEnd(context);
 
         if (myZPItems.isEmpty()) setEmptyState(true);

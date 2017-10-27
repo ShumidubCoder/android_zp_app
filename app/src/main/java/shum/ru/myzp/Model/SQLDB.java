@@ -2,6 +2,7 @@ package shum.ru.myzp.Model;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
@@ -27,9 +28,11 @@ public class SQLDB {
     public final String COLUMN_STSDATE = "stsdate";
     public final String COLUMN_STSVALUE = "stsvalue";
 
+    String itemMonth = "none";
 
 
-    DBHelper dbHelper;
+
+            DBHelper dbHelper;
     SQLiteDatabase db;
 
 
@@ -220,7 +223,74 @@ public class SQLDB {
         //cursor.close();
         //this.db.close();
 
+        //if(myZPItems.size()-1>0) methodToAddTitleItem(myZPItems);
+
         return myZPItems;
+
+    }
+
+
+
+
+
+
+    public void methodToAddTitleItem(List <MyZPItem> myZPItem){
+
+        itemMonth = myZPItem.get(myZPItem.size()-1).getMonth();
+
+        int count = 1;
+
+
+        for (int i = myZPItem.size()-2; i>=0; i--) {
+
+
+
+            if (!myZPItem.get(i).getMonth().equals(itemMonth)){
+
+                String resultValueAndTax;
+                int one;
+                int two;
+
+                if(myZPItem.size() -2 > i){
+                    one = Integer.parseInt(myZPItem.get(i+1).getValue());
+                }else one = 0;
+
+                if(myZPItem.size() -3 > i) {
+                    String str = myZPItem.get(i + 2).getValue();
+                    str = myZPItem.get(i).getValue();
+                    two = Integer.parseInt(str);
+                }else two = 0;
+
+
+
+                String resultValue = String.valueOf(one + two);
+                int three = one + two;
+                //if (three != 0) {resultValueAndTax = String.valueOf(three/0.87);}
+                if (three != 0) {resultValueAndTax = String.valueOf(three*10);}
+                else resultValueAndTax = "0";
+                String strMonth = myZPItem.get(i+1).getMonth();
+
+
+
+                if (i>0) {
+                    myZPItem.add(i+2, new MyZPItem( 999,
+                            strMonth,
+                            strMonth, resultValue,
+                            resultValueAndTax, "",
+                            ""));
+                    count++;
+                }else {
+                    //pass
+                }
+
+
+            }
+
+
+
+
+        }
+
 
     }
 

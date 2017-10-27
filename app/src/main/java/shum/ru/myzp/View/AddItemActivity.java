@@ -11,6 +11,10 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import java.text.SimpleDateFormat;
+import java.util.Arrays;
+import java.util.Date;
+
 import shum.ru.myzp.Controller.Message;
 import shum.ru.myzp.Controller.Validator;
 import shum.ru.myzp.R;
@@ -67,6 +71,19 @@ public class AddItemActivity extends AppCompatActivity {
 
         btnAddItem = mLinearLayout.findViewById(R.id.btn_add_item);
         btnCancel = mLinearLayout.findViewById(R.id.btn_cancel);
+
+
+        Date dateNowMonth = new Date (System.currentTimeMillis());
+        String strNowMonth = new SimpleDateFormat("MM").format(dateNowMonth);
+
+        String strNowDate = new SimpleDateFormat("dd.MM").format(dateNowMonth);
+
+        etForMonth.setText(strNowMonth);
+        etDate.setText(strNowDate);
+        etType.setText("AV");
+
+
+        etValue.setText("0");
 
 
 //        final String [] MONTH = {"01","02","03","04","05","06","07","08","09","10","11","12"};
@@ -209,7 +226,7 @@ public class AddItemActivity extends AppCompatActivity {
             db.addItem(userStringForMonth, userStringType, userStringValue, userStringDate, userStringStsDate, userStringStsValue);
 
             Toast.makeText(AddItemActivity.this, "New item added", Toast.LENGTH_SHORT).show();
-            setTextAsDefault(etForMonth, etType, etDate, etValue, etStsDate, etStsValue);
+            //setTextAsDefault(etForMonth, etType, etDate, etValue, etStsDate, etStsValue);
         }
     }
 
@@ -242,7 +259,23 @@ public class AddItemActivity extends AppCompatActivity {
     }
 
 
+    public void onClickPlusType(View view) {
+        if(etType.getText().toString().equals("AV")) etType.setText("ZP");
+        else etType.setText("AV");
+    }
 
+    public void onClickPlusMounth(View view) {
+
+        final String [] MONTH = {"01","02","03","04","05","06","07","08","09","10","11","12"};
+        String month = etForMonth.getText().toString();
+
+        int i = Arrays.asList(MONTH).indexOf(month);
+        if (i < MONTH.length-1) etForMonth.setText(MONTH[i+1]);
+        else etForMonth.setText(MONTH[0]);
+
+
+
+    }
 }
 
 

@@ -72,9 +72,9 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.ItemViewHolder> {
         itemHolder.tvStsValue.setText(myZPItems.get(i).stsValue);
 
 
-        if ((myZPItems.get(i).type).contains("ZP")) itemHolder.llZP.setBackgroundColor(Color.WHITE);
-//        else if (!(myZPItems.get(i).type).contains("ZP")) return;
-        else if (!(myZPItems.get(i).type).contains("ZP")) itemHolder.llZP.setBackgroundColor(Color.parseColor("#9269d2f5"));
+//        if ((myZPItems.get(i).type).contains("ZP")) itemHolder.llZP.setBackgroundColor(Color.WHITE);
+////        else if (!(myZPItems.get(i).type).contains("ZP")) return;
+//        else if (!(myZPItems.get(i).type).contains("ZP")) itemHolder.llZP.setBackgroundColor(Color.parseColor("#9269d2f5"));
 
     }
 

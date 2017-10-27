@@ -33,7 +33,20 @@ public class MyZPItem {
             this.stsDate = stsDate;
             this.stsValue = stsValue;
 
-        }
+    }
+
+
+    public String getType(){
+        return this.type;
+    }
+
+    public String getMonth(){
+        return this.forMounth;
+    }
+
+    public String getValue(){
+        return this.value;
+    }
 
 }
 
